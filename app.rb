@@ -3,23 +3,20 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'bundler/setup'
 require 'transformer'
-require 'validate'
 require 'instantiate'
+require 'validate'
 
 class Client
   def call(input)
-    validate = ::Validate.new
-    instantiate = ::Instantiate.new
-    worker = Transformer::Worker.new(
-      validate: validate,
-      instantiate: instantiate,
-    )
+    worker = Transformer::Worker.new
     worker.(input)
   end
 end
 
 if $PROGRAM_NAME == __FILE__
-  Application.finalize!
+  Transformer::Application.register(:validate) { Validate.new }
+  Transformer::Application.register(:instantiate) { Instantiate.new }
+  Transformer::Application.finalize!
   client =  Client.new
   result = client.('fnord.txt')
   puts result.inspect

@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/rickenharp/transformer
-  revision: 016ba9e0f28c7bc2f348643bf9f026be5b3cc6ea
+  revision: 4ef93628e3a637a1e03f2e1f7355bbefba8fd3dc
   specs:
-    transformer (0.1.0)
+    transformer (0.2.0)
       dry-struct (~> 0.3)
       dry-system (~> 0.8)
       dry-transaction (~> 0.10)

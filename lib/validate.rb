@@ -6,16 +6,19 @@ Dry::Validation.load_extensions(:monads)
 
 class Validate
   include Dry::Transaction::Operation
-  Schema = Dry::Validation.Form do
-    required(:foo).filled
-    required(:bar).filled
-  end
 
   def call(input)
     data = JSON.parse(input)
-    validated = Schema.(data)
+    validated = schema.(data)
     validated.to_either
   rescue StandardError => exception
     Left(exception)
+  end
+
+  def schema
+    @schema ||= Dry::Validation.Form do
+      required(:foo).filled
+      required(:bar).filled
+    end
   end
 end

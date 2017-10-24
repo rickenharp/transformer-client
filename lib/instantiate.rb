@@ -1,6 +1,7 @@
 require 'dry/transaction/operation'
 require 'product'
 
+
 class Instantiate
   include Dry::Transaction::Operation
 
