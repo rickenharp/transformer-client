@@ -6,8 +6,8 @@ class Instantiate
   include Dry::Transaction::Operation
 
   def call(input)
-    Right(Product.new(input))
+    Success(Product.new(input.to_h))
   rescue StandardError => exception
-    Left(exception)
+    Failure(exception)
   end
 end
